@@ -329,7 +329,7 @@
 
   <script>
     async function loadDashboard() {
-      const res = await fetch('./public/scenarios.json');
+      const res = await fetch('./scenarios.json');
       const data = await res.json();
       renderDashboard(data);
     }
