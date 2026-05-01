@@ -6,7 +6,7 @@
   <title>Adamant | Data Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Barlow+Condensed:wght@700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
       --black: #000000;
@@ -15,13 +15,10 @@
       --sunset: #C4812A;
       --sunrise: #4A9E6B;
       --border: rgba(105, 105, 105, 0.3);
+      --headline-font: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       background: var(--black);
@@ -31,51 +28,37 @@
       min-height: 100vh;
     }
 
-    /* NAV */
     nav {
       display: flex;
       align-items: center;
       padding: 0 40px;
-      height: 64px;
+      height: 72px;
       border-bottom: 1px solid var(--border);
-      gap: 48px;
     }
 
     .nav-logo {
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--white);
+      display: flex;
+      align-items: center;
+      gap: 10px;
       text-decoration: none;
+    }
+
+    .nav-logo svg {
+      height: 32px;
+      width: auto;
       flex-shrink: 0;
     }
 
-    .nav-logo span {
-      color: var(--sunset);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--grey);
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 400;
-      letter-spacing: 0.04em;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
+    .nav-logo-text {
+      font-family: var(--headline-font);
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
       color: var(--white);
+      line-height: 1;
     }
 
-    /* PAGE */
     .page {
       max-width: 1100px;
       margin: 0 auto;
@@ -87,59 +70,41 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--grey);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .page-title {
-      font-family: 'Arial Narrow', 'Arial', sans-serif;
-      font-size: clamp(36px, 5vw, 60px);
-      font-weight: 700;
+      font-family: var(--headline-font);
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 800;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       line-height: 1;
-      margin-bottom: 12px;
+      margin-bottom: 56px;
     }
 
-    .page-subtitle {
-      color: var(--grey);
-      font-size: 14px;
-      font-weight: 300;
-      max-width: 560px;
-      line-height: 1.6;
-      margin-bottom: 64px;
-    }
-
-    /* TABLE WRAPPER for horizontal scroll on mobile */
     .table-wrapper {
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
     }
 
-    /* DASHBOARD TABLE */
     table {
       width: 100%;
       border-collapse: collapse;
       min-width: 640px;
     }
 
-    /* COLUMN HEADERS */
     thead tr th {
       padding: 0 0 28px;
       text-align: left;
       vertical-align: bottom;
     }
 
-    th.metric-col {
-      width: 26%;
-      padding-right: 24px;
-    }
+    th.metric-col { width: 24%; padding-right: 24px; }
+    th.scenario-col { width: 38%; padding-right: 24px; }
 
-    th.scenario-col {
-      width: 37%;
-      padding-right: 24px;
-    }
-
-    .col-header-label {
+    .col-header-sublabel {
+      font-family: 'Inter', sans-serif;
       font-size: 10px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -149,41 +114,35 @@
     }
 
     .col-header-name {
-      font-family: 'Arial Narrow', 'Arial', sans-serif;
-      font-size: clamp(18px, 2.5vw, 26px);
-      font-weight: 700;
+      font-family: var(--headline-font);
+      font-size: clamp(20px, 2.8vw, 30px);
+      font-weight: 800;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      line-height: 1.1;
+      line-height: 1.05;
       display: block;
     }
 
     .col-header-divider {
       height: 2px;
-      margin-top: 16px;
+      margin-top: 14px;
       border: none;
     }
 
-    /* ROWS */
     tbody tr {
       border-top: 1px solid var(--border);
       transition: background 0.15s;
     }
 
-    tbody tr:hover {
-      background: rgba(255,255,255,0.025);
-    }
+    tbody tr:hover { background: rgba(255,255,255,0.025); }
 
-    tbody td {
-      padding: 24px 0;
-      vertical-align: top;
-    }
+    tbody td { padding: 24px 0; vertical-align: top; }
 
     td.metric-label {
       color: var(--grey);
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 400;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       padding-right: 24px;
       padding-top: 26px;
@@ -193,16 +152,15 @@
     td.metric-value {
       font-size: 14px;
       font-weight: 300;
-      line-height: 1.6;
+      line-height: 1.65;
       padding-right: 24px;
       color: var(--white);
     }
 
-    /* SOURCE TOOLTIP */
     .source-wrapper {
       position: relative;
       display: inline-block;
-      margin-top: 8px;
+      margin-top: 10px;
     }
 
     .source-icon {
@@ -219,13 +177,9 @@
       cursor: pointer;
       transition: border-color 0.2s, color 0.2s;
       font-style: normal;
-      text-decoration: none;
     }
 
-    .source-icon:hover {
-      border-color: var(--white);
-      color: var(--white);
-    }
+    .source-icon:hover { border-color: var(--white); color: var(--white); }
 
     .tooltip {
       display: none;
@@ -251,11 +205,8 @@
       word-break: break-all;
     }
 
-    .source-wrapper:hover .tooltip {
-      display: block;
-    }
+    .source-wrapper:hover .tooltip { display: block; }
 
-    /* FOOTER */
     .dashboard-footer {
       margin-top: 80px;
       padding-top: 32px;
@@ -265,12 +216,8 @@
       line-height: 1.7;
     }
 
-    .dashboard-footer a {
-      color: var(--grey);
-      text-decoration: underline;
-    }
+    .dashboard-footer a { color: var(--grey); text-decoration: underline; }
 
-    /* LOADING STATE */
     .loading {
       color: var(--grey);
       font-size: 13px;
@@ -278,40 +225,27 @@
       text-align: center;
     }
 
-    /* MOBILE NAV */
     @media (max-width: 640px) {
-      nav {
-        padding: 0 20px;
-        gap: 24px;
-        overflow-x: auto;
-      }
-      .nav-links {
-        gap: 20px;
-      }
-      .page {
-        padding: 40px 20px 80px;
-      }
+      nav { padding: 0 20px; }
+      .page { padding: 40px 20px 80px; }
     }
   </style>
 </head>
 <body>
 
   <nav>
-    <a class="nav-logo" href="#"><span>X</span> Adamant</a>
-    <ul class="nav-links">
-      <li><a href="#" class="active">Data Dashboard</a></li>
-      <li><a href="#">Action Kit</a></li>
-      <li><a href="#">Resource Library</a></li>
-      <li><a href="#">Join the Coalition</a></li>
-    </ul>
+    <a class="nav-logo" href="https://weareadamant.ca">
+      <svg viewBox="0 0 40 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="0,0 40,0 20,24" fill="#ffffff"/>
+        <polygon points="0,24 40,24 20,48" fill="#ffffff"/>
+      </svg>
+      <span class="nav-logo-text">Adamant</span>
+    </a>
   </nav>
 
   <div class="page">
     <p class="page-label">Economic Analysis</p>
     <h1 class="page-title">The Choice in Numbers</h1>
-    <p class="page-subtitle">
-      A side-by-side comparison of what Canada gets when it invests in LNG expansion versus clean economy industries, across the metrics that matter to working people.
-    </p>
 
     <div class="table-wrapper">
       <div class="loading" id="loading">Loading data...</div>
@@ -337,22 +271,19 @@
     function renderDashboard(data) {
       const { scenarios, metrics } = data;
 
-      // --- THEAD ---
       const thead = document.getElementById('table-head');
       const headerRow = document.createElement('tr');
 
-      // Empty metric column header
       const metricTh = document.createElement('th');
       metricTh.className = 'metric-col';
       headerRow.appendChild(metricTh);
 
-      // Scenario column headers
       scenarios.forEach(scenario => {
         const th = document.createElement('th');
         th.className = 'scenario-col';
 
         const sublabel = document.createElement('span');
-        sublabel.className = 'col-header-label';
+        sublabel.className = 'col-header-sublabel';
         sublabel.style.color = scenario.accent;
         sublabel.textContent = scenario.sublabel;
 
@@ -372,19 +303,16 @@
 
       thead.appendChild(headerRow);
 
-      // --- TBODY ---
       const tbody = document.getElementById('table-body');
 
       metrics.forEach(metric => {
         const row = document.createElement('tr');
 
-        // Metric label cell
         const labelTd = document.createElement('td');
         labelTd.className = 'metric-label';
         labelTd.textContent = metric.label;
         row.appendChild(labelTd);
 
-        // Value cells
         scenarios.forEach(scenario => {
           const td = document.createElement('td');
           td.className = 'metric-value';
@@ -393,7 +321,6 @@
           valueText.textContent = metric.values[scenario.id] || '';
           td.appendChild(valueText);
 
-          // Source tooltip (only on first scenario column)
           if (scenario === scenarios[0] && metric.source) {
             const wrapper = document.createElement('div');
             wrapper.className = 'source-wrapper';
@@ -426,7 +353,6 @@
         tbody.appendChild(row);
       });
 
-      // Show table
       document.getElementById('loading').style.display = 'none';
       document.getElementById('dashboard-table').style.display = 'table';
     }
