@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adamant | Data Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black: #000000;
+      --white: #ffffff;
+      --grey: #696969;
+      --sunset: #C4812A;
+      --sunrise: #4A9E6B;
+      --border: rgba(105, 105, 105, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      align-items: center;
+      padding: 0 40px;
+      height: 64px;
+      border-bottom: 1px solid var(--border);
+      gap: 48px;
+    }
+
+    .nav-logo {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .nav-logo span {
+      color: var(--sunset);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--grey);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--white);
+    }
+
+    /* PAGE */
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 64px 40px 120px;
+    }
+
+    .page-label {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 16px;
+    }
+
+    .page-title {
+      font-family: 'Arial Narrow', 'Arial', sans-serif;
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .page-subtitle {
+      color: var(--grey);
+      font-size: 14px;
+      font-weight: 300;
+      max-width: 560px;
+      line-height: 1.6;
+      margin-bottom: 64px;
+    }
+
+    /* TABLE WRAPPER for horizontal scroll on mobile */
+    .table-wrapper {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* DASHBOARD TABLE */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 640px;
+    }
+
+    /* COLUMN HEADERS */
+    thead tr th {
+      padding: 0 0 28px;
+      text-align: left;
+      vertical-align: bottom;
+    }
+
+    th.metric-col {
+      width: 26%;
+      padding-right: 24px;
+    }
+
+    th.scenario-col {
+      width: 37%;
+      padding-right: 24px;
+    }
+
+    .col-header-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 400;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .col-header-name {
+      font-family: 'Arial Narrow', 'Arial', sans-serif;
+      font-size: clamp(18px, 2.5vw, 26px);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      line-height: 1.1;
+      display: block;
+    }
+
+    .col-header-divider {
+      height: 2px;
+      margin-top: 16px;
+      border: none;
+    }
+
+    /* ROWS */
+    tbody tr {
+      border-top: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    tbody tr:hover {
+      background: rgba(255,255,255,0.025);
+    }
+
+    tbody td {
+      padding: 24px 0;
+      vertical-align: top;
+    }
+
+    td.metric-label {
+      color: var(--grey);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding-right: 24px;
+      padding-top: 26px;
+      line-height: 1.5;
+    }
+
+    td.metric-value {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.6;
+      padding-right: 24px;
+      color: var(--white);
+    }
+
+    /* SOURCE TOOLTIP */
+    .source-wrapper {
+      position: relative;
+      display: inline-block;
+      margin-top: 8px;
+    }
+
+    .source-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1px solid var(--grey);
+      color: var(--grey);
+      font-size: 9px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+      font-style: normal;
+      text-decoration: none;
+    }
+
+    .source-icon:hover {
+      border-color: var(--white);
+      color: var(--white);
+    }
+
+    .tooltip {
+      display: none;
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 0;
+      background: #111;
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      font-size: 11px;
+      line-height: 1.5;
+      color: var(--grey);
+      width: 260px;
+      z-index: 10;
+    }
+
+    .tooltip a {
+      color: var(--white);
+      text-decoration: underline;
+      display: block;
+      margin-top: 6px;
+      font-size: 10px;
+      word-break: break-all;
+    }
+
+    .source-wrapper:hover .tooltip {
+      display: block;
+    }
+
+    /* FOOTER */
+    .dashboard-footer {
+      margin-top: 80px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      color: var(--grey);
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .dashboard-footer a {
+      color: var(--grey);
+      text-decoration: underline;
+    }
+
+    /* LOADING STATE */
+    .loading {
+      color: var(--grey);
+      font-size: 13px;
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    /* MOBILE NAV */
+    @media (max-width: 640px) {
+      nav {
+        padding: 0 20px;
+        gap: 24px;
+        overflow-x: auto;
+      }
+      .nav-links {
+        gap: 20px;
+      }
+      .page {
+        padding: 40px 20px 80px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="#"><span>X</span> Adamant</a>
+    <ul class="nav-links">
+      <li><a href="#" class="active">Data Dashboard</a></li>
+      <li><a href="#">Action Kit</a></li>
+      <li><a href="#">Resource Library</a></li>
+      <li><a href="#">Join the Coalition</a></li>
+    </ul>
+  </nav>
+
+  <div class="page">
+    <p class="page-label">Economic Analysis</p>
+    <h1 class="page-title">The Choice in Numbers</h1>
+    <p class="page-subtitle">
+      A side-by-side comparison of what Canada gets when it invests in LNG expansion versus clean economy industries, across the metrics that matter to working people.
+    </p>
+
+    <div class="table-wrapper">
+      <div class="loading" id="loading">Loading data...</div>
+      <table id="dashboard-table" style="display:none">
+        <thead id="table-head"></thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
+
+    <div class="dashboard-footer">
+      Sources: IISD, Clean Energy Canada, IEA, Canadian Climate Institute, Natural Resources Canada.<br/>
+      Data reflects best available research as of 2025. <a href="https://weareadamant.ca" target="_blank">weareadamant.ca</a>
+    </div>
+  </div>
+
+  <script>
+    async function loadDashboard() {
+      const res = await fetch('./public/scenarios.json');
+      const data = await res.json();
+      renderDashboard(data);
+    }
+
+    function renderDashboard(data) {
+      const { scenarios, metrics } = data;
+
+      // --- THEAD ---
+      const thead = document.getElementById('table-head');
+      const headerRow = document.createElement('tr');
+
+      // Empty metric column header
+      const metricTh = document.createElement('th');
+      metricTh.className = 'metric-col';
+      headerRow.appendChild(metricTh);
+
+      // Scenario column headers
+      scenarios.forEach(scenario => {
+        const th = document.createElement('th');
+        th.className = 'scenario-col';
+
+        const sublabel = document.createElement('span');
+        sublabel.className = 'col-header-label';
+        sublabel.style.color = scenario.accent;
+        sublabel.textContent = scenario.sublabel;
+
+        const name = document.createElement('span');
+        name.className = 'col-header-name';
+        name.textContent = scenario.label;
+
+        const divider = document.createElement('hr');
+        divider.className = 'col-header-divider';
+        divider.style.background = scenario.accent;
+
+        th.appendChild(sublabel);
+        th.appendChild(name);
+        th.appendChild(divider);
+        headerRow.appendChild(th);
+      });
+
+      thead.appendChild(headerRow);
+
+      // --- TBODY ---
+      const tbody = document.getElementById('table-body');
+
+      metrics.forEach(metric => {
+        const row = document.createElement('tr');
+
+        // Metric label cell
+        const labelTd = document.createElement('td');
+        labelTd.className = 'metric-label';
+        labelTd.textContent = metric.label;
+        row.appendChild(labelTd);
+
+        // Value cells
+        scenarios.forEach(scenario => {
+          const td = document.createElement('td');
+          td.className = 'metric-value';
+
+          const valueText = document.createElement('div');
+          valueText.textContent = metric.values[scenario.id] || '';
+          td.appendChild(valueText);
+
+          // Source tooltip (only on first scenario column)
+          if (scenario === scenarios[0] && metric.source) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'source-wrapper';
+
+            const icon = document.createElement('span');
+            icon.className = 'source-icon';
+            icon.textContent = 'i';
+
+            const tooltip = document.createElement('div');
+            tooltip.className = 'tooltip';
+            tooltip.textContent = metric.source;
+
+            if (metric.sourceUrl) {
+              const link = document.createElement('a');
+              link.href = metric.sourceUrl;
+              link.target = '_blank';
+              link.rel = 'noopener';
+              link.textContent = metric.sourceUrl;
+              tooltip.appendChild(link);
+            }
+
+            wrapper.appendChild(icon);
+            wrapper.appendChild(tooltip);
+            td.appendChild(wrapper);
+          }
+
+          row.appendChild(td);
+        });
+
+        tbody.appendChild(row);
+      });
+
+      // Show table
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('dashboard-table').style.display = 'table';
+    }
+
+    loadDashboard().catch(err => {
+      document.getElementById('loading').textContent = 'Failed to load data.';
+      console.error(err);
+    });
+  </script>
+
+</body>
+</html>

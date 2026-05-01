@@ -1,0 +1,78 @@
+{
+  "scenarios": [
+    {
+      "id": "lng-expansion",
+      "label": "LNG Expansion",
+      "sublabel": "Sunset",
+      "accent": "#C4812A"
+    },
+    {
+      "id": "clean-economy",
+      "label": "Clean Economy Investment",
+      "sublabel": "Sunrise",
+      "accent": "#4A9E6B"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "jobs-per-million",
+      "label": "Jobs per $1M invested",
+      "source": "LNG Canada: $40B investment, ~300 permanent jobs. Clean Energy Canada / Navius Research, A Pivotal Moment (2023)",
+      "sourceUrl": "https://cleanenergycanada.org/report/a-pivotal-moment/",
+      "values": {
+        "lng-expansion": "~1 permanent job per $130M invested",
+        "clean-economy": "509,000 clean energy jobs in 2025, growing 7% annually to 2.7M by 2050"
+      }
+    },
+    {
+      "id": "local-multiplier",
+      "label": "Local economic multiplier",
+      "source": "IISD, Why Canadian LNG Is Not a Path to Energy Security (2025)",
+      "sourceUrl": "https://www.iisd.org/articles/deep-dive/canadian-lng-is-not-path-to-energy-security-stronger-domestic-economy",
+      "values": {
+        "lng-expansion": "Majority foreign-owned. Profits flow to Shell, PETRONAS, PetroChina, Mitsubishi, KOGAS.",
+        "clean-economy": "Renewable hubs distributed across Canada, keeping jobs and investment in local communities"
+      }
+    },
+    {
+      "id": "future-market-growth",
+      "label": "Future market growth",
+      "source": "IEA Gas 2025; NRCan Clean Electricity Strategy (2024)",
+      "sourceUrl": "https://www.iea.org/reports/gas-2025/executive-summary",
+      "values": {
+        "lng-expansion": "IEA projects 65 bcm LNG surplus by 2030. Global gas demand peaks this decade.",
+        "clean-economy": "Clean energy GDP projected to reach $107B with $58B in annual investment and 600,000+ jobs by 2030"
+      }
+    },
+    {
+      "id": "infrastructure-lifespan",
+      "label": "Infrastructure lifespan",
+      "source": "LNG Canada project documentation; IISD, LNG Expansion Canada Not Worth the Risk (2024)",
+      "sourceUrl": "https://www.iisd.org/articles/deep-dive/lng-expansion-canada-not-worth-risk",
+      "values": {
+        "lng-expansion": "25-40 year asset commitment. LNG Canada contracts run 27 years. High stranded asset risk.",
+        "clean-economy": "Modular, upgradeable technology. Solar, wind, and storage costs continue to fall as capacity expands."
+      }
+    },
+    {
+      "id": "public-subsidy",
+      "label": "Public subsidy required",
+      "source": "IISD, Launching a Loss (2025)",
+      "sourceUrl": "https://www.iisd.org/publications/report/government-support-lng-british-columbia",
+      "values": {
+        "lng-expansion": "CAD $3.93B in federal and BC government support committed to LNG by end of 2030",
+        "clean-economy": "Subsidies decline as technology matures. Renewables already cheapest new power source in most markets."
+      }
+    },
+    {
+      "id": "electricity-rate-impact",
+      "label": "Electricity rate impact",
+      "source": "Canadian Climate Institute, Clean Electricity Affordable Energy (2023)",
+      "sourceUrl": "https://climateinstitute.ca/reports/electricity/",
+      "values": {
+        "lng-expansion": "LNG expansion strains BC grid capacity, increasing costs for households and industry",
+        "clean-economy": "Average Canadian household energy spending projected to fall 12% by 2050 under clean electricity transition"
+      }
+    }
+  ]
+}
