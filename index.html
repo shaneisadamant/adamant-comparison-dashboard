@@ -6,7 +6,7 @@
   <title>Adamant | Data Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Barlow+Condensed:wght@700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Anton&display=swap" rel="stylesheet" />
   <style>
     :root {
       --black: #000000;
@@ -15,7 +15,7 @@
       --sunset: #C4812A;
       --sunrise: #4A9E6B;
       --border: rgba(105, 105, 105, 0.3);
-      --headline-font: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
+      --headline-font: 'Anton', 'Arial Narrow', Arial, sans-serif;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -43,20 +43,10 @@
       text-decoration: none;
     }
 
-    .nav-logo svg {
-      height: 32px;
+    .nav-logo img {
+      height: 36px;
       width: auto;
       flex-shrink: 0;
-    }
-
-    .nav-logo-text {
-      font-family: var(--headline-font);
-      font-size: 26px;
-      font-weight: 800;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--white);
-      line-height: 1;
     }
 
     .page {
@@ -76,7 +66,7 @@
     .page-title {
       font-family: var(--headline-font);
       font-size: clamp(40px, 6vw, 72px);
-      font-weight: 800;
+      font-weight: 400;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       line-height: 1;
@@ -116,7 +106,7 @@
     .col-header-name {
       font-family: var(--headline-font);
       font-size: clamp(20px, 2.8vw, 30px);
-      font-weight: 800;
+      font-weight: 400;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       line-height: 1.05;
@@ -235,11 +225,7 @@
 
   <nav>
     <a class="nav-logo" href="https://weareadamant.ca">
-      <svg viewBox="0 0 40 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="0,0 40,0 20,24" fill="#ffffff"/>
-        <polygon points="0,24 40,24 20,48" fill="#ffffff"/>
-      </svg>
-      <span class="nav-logo-text">Adamant</span>
+      <img src="./Adamant_Mark_White_LARGE.png" alt="Adamant" />
     </a>
   </nav>
 
